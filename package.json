@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.6",
+    "@next/font": "^13.1.6",
     "@portabletext/react": "^2.0.1",
     "@reduxjs/toolkit": "^1.9.2",
     "@sanity/client": "^5.2.2",

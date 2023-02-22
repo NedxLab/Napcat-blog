@@ -1,6 +1,6 @@
 import { FaPhotoVideo } from "react-icons/fa";
 import Link from "next/link";
-import { parseISO, format } from "date-fns";
+import { format } from "date-fns";
 import imageUrlBuilder from "@sanity/image-url";
 import client from "@/client";
 import Image from "next/image";
@@ -67,7 +67,7 @@ const PostsLists = ({ id, title, slug, date, image, snippet }) => {
             &bull;
           </span>
           <time className="text-sm" dateTime={date}>
-            {format(parseISO(date), "MMMM dd, yyyy")}
+            {format(new Date(date), "yyyy-MM-dd")}
           </time>
         </div>
       </div>

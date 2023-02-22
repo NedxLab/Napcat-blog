@@ -15,6 +15,11 @@ function urlFor(source) {
 const Index: NextPageWithLayout = ({ posts }) => {
   return (
     <>
+      <h1 className="mx-6 pt-4 text-3xl font-bold">Napcat Blog</h1>
+      <p className="mx-6">
+        Stay up to date with the latest stories and commentary brought to you by
+        Binance, the world's leading blockchain and crypto ecosystem.
+      </p>
       <BlogCarousel posts={posts} />
       <div className="grid gap-8 mt-10 lg:gap-8 md:grid-cols-2 xl:grid-cols-3 px-12">
         {posts.length > 0 &&

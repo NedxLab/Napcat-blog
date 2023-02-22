@@ -1,5 +1,5 @@
 // [slug].tsx
-
+import Image from "next/image";
 import groq from "groq";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
@@ -32,31 +32,25 @@ const Post = ({ post }) => {
   console.log(post);
 
   const {
-    title = "Missing title",
-    name = "Missing name",
-    categories,
+    title = "Napcat News",
+    _createdAt,
+    mainImage,
     authorImage,
     body = [],
   } = post;
   return (
     <article>
-      <h1>{title}</h1>
-      <span>By {name}</span>
-      {categories && (
-        <ul>
-          Posted in
-          {categories.map((category) => (
-            <li key={category}>{category}</li>
-          ))}
-        </ul>
-      )}
-      {authorImage && (
-        <div>
-          <img
-            src={urlFor(authorImage).width(50).url()}
-            alt={`${name}'s picture`}
-          />
-        </div>
+      <h1 className="text-4xl font-bold">{title}</h1>
+
+      {_createdAt}
+      {mainImage && (
+        <Image
+          src={urlFor(mainImage).url()}
+          alt={`${title}'s picture`}
+          height={300}
+          width={600}
+          className="min-h-full min-w-full p-12"
+        />
       )}
       <PortableText value={body} components={ptComponents} />
     </article>
@@ -64,11 +58,7 @@ const Post = ({ post }) => {
 };
 
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
-  title,
-  "name": author->name,
-  "categories": categories[]->title,
-  "authorImage": author->image,
-  body
+ ...,
 }`;
 export async function getStaticPaths() {
   const paths = await client.fetch(

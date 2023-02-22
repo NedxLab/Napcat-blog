@@ -41,7 +41,17 @@ module.exports = {
       xxl: "1536px",
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        begin: {
+          from: { transform: "translateX(100vw)" },
+          to: { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        begin: "begin 0.4s ease-in-out",
+      },
+    },
   },
   plugins: [],
 };
