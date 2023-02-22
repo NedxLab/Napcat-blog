@@ -6,17 +6,16 @@ import client from "../client";
 import type { NextPageWithLayout } from "./_app";
 import type { ReactElement } from "react";
 import imageUrlBuilder from "@sanity/image-url";
+import BlogCarousel from "@/components/Carousel";
 
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 
 const Index: NextPageWithLayout = ({ posts }) => {
-  console.log(posts);
-
   return (
     <>
-      <h1>Welcome to a blog!</h1>
+      <BlogCarousel posts={posts} />
       <div className="grid gap-8 mt-10 lg:gap-8 md:grid-cols-2 xl:grid-cols-3 px-12">
         {posts.length > 0 &&
           posts.map(
