@@ -5,26 +5,31 @@ import { useThemeContext } from "@/theme";
 import { Mode } from "@/types/theme";
 import { AiOutlineBars } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const variants = {
   open: { x: 0 },
   closed: {
-    x: 400,
+    x: 600,
   },
   show: {
-    display: "fixed",
+    display: "block",
   },
   hide: {
-    display: "none",
+    x: 0,
+    transitionEnd: {
+      display: "none",
+    },
   },
 };
 
 const Navbar = () => {
   const { mode, changeMode } = useThemeContext();
   const [active, setActive] = useState(false);
-  console.log(active);
-
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+  }, [width]);
   const toggleMode = () => {
     changeMode(mode === Mode.Light ? Mode.Dark : Mode.Light);
   };
@@ -40,6 +45,11 @@ const Navbar = () => {
   ];
   return (
     <>
+      <style jsx global>{`
+        body {
+          overflow: ${width > 900 ? "unset" : active ? "hidden" : "unset"};
+        }
+      `}</style>
       <div
         className="hidden flex-row justify-evenly items-center w-full pb-2 pt-4 relative mld:flex"
         style={{
@@ -47,7 +57,10 @@ const Navbar = () => {
             "12px 12px 32px rgba(13, 39, 80, 0.25), -10px -10px 15px white",
         }}
       >
-        <h1 className=" font-extrabold text-2xl">Napcat</h1>
+        <h1 className=" font-extrabold text-2xl">
+          {" "}
+          <Link href={"/"}>Napcat</Link>
+        </h1>
         <ul className="capitalize font-medium flex flex-row space-x-4">
           {navlists.map((navlist, index) => (
             <li key={index}>
@@ -77,7 +90,9 @@ const Navbar = () => {
             "12px 12px 32px rgba(13, 39, 80, 0.25), -10px -10px 15px white",
         }}
       >
-        <h1 className=" font-extrabold text-2xl">Napcat</h1>
+        <h1 className=" font-extrabold text-2xl">
+          <Link href={"/"}>Napcat</Link>
+        </h1>
 
         <div className="flex flex-row space-x-4">
           <button className="rounded-md border py-1 px-5 bg-gradient-to-r  from-green-200 to-indigo-400">
@@ -87,13 +102,21 @@ const Navbar = () => {
             <AiOutlineBars />
           </button>
         </div>
-        <div className="w-screen h-screen top-0 fixed  z-10">
+        <motion.div
+          initial={{ display: "none" }}
+          animate={active ? "show" : "hide"}
+          variants={variants}
+          transition={{ duration: 1, ease: "easeInOut" }}
+          className={`top-0 fixed w-screen h-screen z-10 bg-[#0000007a] right-0 left-0`}
+        >
           <motion.div
-            initial={{ x: 400 }}
+            initial={{ x: 600 }}
             animate={active ? "open" : "closed"}
             variants={variants}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="capitalize px-6 pt-14 font-medium flex relative flex-col z-20 w-96 float-right border bg-[#e8eaec] h-screen space-y-8"
+            transition={{ duration: 1, ease: "easeInOut" }}
+            className={`capitalize px-6 pt-14 font-medium flex relative flex-col z-20 w-72 overflow-y-auto float-right border ${
+              mode == "light" ? "bg-[#e8eaec]" : " bg-black"
+            } h-screen space-y-8`}
           >
             <FaTimes
               onClick={() => setActive(false)}
@@ -121,7 +144,7 @@ const Navbar = () => {
               ))}
             </ul>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

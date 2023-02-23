@@ -28,6 +28,7 @@ module.exports = {
       msd: "830px",
       mmsd: { max: "829px" },
       mld: "900px",
+      mmld: { max: "899px" },
       lg: "1024px",
       // => @media (min-width: 1024px) { ... }
 

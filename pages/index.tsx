@@ -1,18 +1,15 @@
 // frontend/pages/index.tsx
 import PostsLists from "@/components/PostsLists";
-import Link from "next/link";
 import groq from "groq";
 import client from "../client";
 import type { NextPageWithLayout } from "./_app";
 import type { ReactElement } from "react";
-import imageUrlBuilder from "@sanity/image-url";
 import BlogCarousel from "@/components/Carousel";
+import { IPosts } from "@/types/types";
 
-function urlFor(source) {
-  return imageUrlBuilder(client).image(source);
-}
+const Index: NextPageWithLayout = ({ posts }: any) => {
+  console.log(posts);
 
-const Index: NextPageWithLayout = ({ posts }) => {
   return (
     <>
       <h1 className="mx-6 pt-4 text-3xl font-bold">Napcat Blog</h1>
@@ -24,14 +21,7 @@ const Index: NextPageWithLayout = ({ posts }) => {
       <div className="grid gap-8 mt-10 lg:gap-8 md:grid-cols-2 xl:grid-cols-3 px-12">
         {posts.length > 0 &&
           posts.map(
-            ({
-              _id,
-              title = "",
-              slug = "",
-              publishedAt = "",
-              mainImage = "",
-              snippet = "",
-            }) =>
+            ({ _id, title, slug, publishedAt, mainImage, snippet }: IPosts) =>
               slug && (
                 <PostsLists
                   id={_id}

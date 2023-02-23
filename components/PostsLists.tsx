@@ -1,17 +1,12 @@
 import { FaPhotoVideo } from "react-icons/fa";
 import Link from "next/link";
 import { format } from "date-fns";
-import imageUrlBuilder from "@sanity/image-url";
-import client from "@/client";
+import urlFor from "@/utils";
 import Image from "next/image";
-import groq from "groq";
 import { PortableText } from "@portabletext/react";
+import { IPosts } from "@/types/types";
 
-function urlFor(source) {
-  return imageUrlBuilder(client).image(source);
-}
-
-const PostsLists = ({ id, title, slug, date, image, snippet }) => {
+const PostsLists = ({ id, title, slug, date, image, snippet }: IPosts) => {
   return (
     <>
       <div className="cursor-pointer group ">
@@ -51,16 +46,8 @@ const PostsLists = ({ id, title, slug, date, image, snippet }) => {
             </span>
           </Link>
         </h2>
+
         <PortableText value={snippet} />
-        {/* <div className="hidden">
-          {post.excerpt && (
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 line-clamp-3">
-              <Link href={`/post/${post.slug.current}`}>
-                {post.excerpt}
-              </Link>
-            </p>
-          )}
-        </div> */}
 
         <div className="flex items-center mt-3 space-x-3 text-gray-500 dark:text-gray-400">
           <span className="text-xs text-gray-300 dark:text-gray-600">

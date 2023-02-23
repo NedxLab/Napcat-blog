@@ -12,13 +12,14 @@ import {
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { IFooter } from "@/types/types";
 
 const Footer = () => {
   return (
     <>
       <ul className="flex flex-row justify-evenly mt-10 px-5 mmd:hidden">
-        {footerLinks.map((el, i) => (
-          <li className="font-bold py-2 px-2 msd:py-8">
+        {footerLinks.map((el: IFooter, i) => (
+          <li className="font-bold py-2 px-2 msd:py-8" key={i}>
             <div className="flex flex-row justify-between">
               <h1> {el.name}</h1>
               <button className="hidden mmd:block">
@@ -58,8 +59,8 @@ const Footer = () => {
       </ul>
 
       <ul className="hidden px-5 flex-row justify-evenly mt-10 mmd:flex-col mmd:flex">
-        {footerLinks.map((el, i) => (
-          <Menu as="li" className="font-bold py-2 msd:py-8">
+        {footerLinks.map((el: IFooter, i) => (
+          <Menu as="li" className="font-bold py-2 msd:py-8" key={i}>
             <div className="flex flex-row justify-between">
               <h1> {el.name}</h1>
               <Menu.Button className="hidden mmd:block">
@@ -77,7 +78,7 @@ const Footer = () => {
             >
               <Menu.Items className="flex flex-col gap-1 font-light overflow-hidden mt-2">
                 {el.links.map((link, index) => (
-                  <Menu.Item
+                  <li
                     key={index}
                     className="bg-gradient-to-r from-green-200 to-indigo-400 
                   bg-[length:0px_10px]
@@ -88,7 +89,7 @@ const Footer = () => {
                   hover:bg-[length:100%_3px] group-hover:bg-[length:100%_10px]"
                   >
                     <Link href={link.slug}>{link.name}</Link>
-                  </Menu.Item>
+                  </li>
                 ))}
               </Menu.Items>
             </Transition>
