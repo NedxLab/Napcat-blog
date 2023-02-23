@@ -39,16 +39,6 @@ const Post: React.FC<{ post: IPosts }> = ({ post }) => {
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
  ...,
 }`;
-// export const getStaticPaths: GetStaticPaths = async () => {
-//   const paths = await client.fetch(
-//     groq`*[_type == "post" && defined(slug.current)][].slug.current`
-//   );
-
-//   return {
-//     paths: paths.map((slug: string) => ({ params: { slug } })),
-//     fallback: true,
-//   };
-// };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // It's important to default the slug so that it doesn't return "undefined"
