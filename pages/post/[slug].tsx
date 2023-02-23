@@ -5,7 +5,7 @@ import { PortableText } from "@portabletext/react";
 import client from "../../client";
 import { format } from "date-fns";
 import urlFor from "@/utils";
-import { GetStaticProps, GetStaticPaths } from "next";
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { IPosts } from "@/types/types";
 
@@ -39,18 +39,18 @@ const Post: React.FC<{ post: IPosts }> = ({ post }) => {
 const query = groq`*[_type == "post" && slug.current == $slug][0]{
  ...,
 }`;
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await client.fetch(
-    groq`*[_type == "post" && defined(slug.current)][].slug.current`
-  );
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   const paths = await client.fetch(
+//     groq`*[_type == "post" && defined(slug.current)][].slug.current`
+//   );
 
-  return {
-    paths: paths.map((slug: string) => ({ params: { slug } })),
-    fallback: true,
-  };
-};
+//   return {
+//     paths: paths.map((slug: string) => ({ params: { slug } })),
+//     fallback: true,
+//   };
+// };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // It's important to default the slug so that it doesn't return "undefined"
   const { slug = "" } = context.params as IParams;
   const post = await client.fetch(query, { slug });
