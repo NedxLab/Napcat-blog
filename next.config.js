@@ -4,6 +4,9 @@ const nextConfig = {
     domains: ["cdn.sanity.io"],
   },
   reactStrictMode: true,
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;

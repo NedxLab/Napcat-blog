@@ -39,7 +39,7 @@ const PostsLists = ({ id, title, slug, date, image, snippet }) => {
         <h2 className="mt-2 text-lg font-semibold tracking-normal text-brand-primary dark:text-white">
           <Link href={`/post/${encodeURIComponent(slug.current)}`}>
             <span
-              className="  capitalize   bg-gradient-to-r from-green-200 to-green-100 dark:from-purple-800 dark:to-purple-900
+              className="  capitalize   bg-gradient-to-r from-green-200 to-indigo-400
           bg-[length:0px_10px]
           bg-left-bottom
           bg-no-repeat
