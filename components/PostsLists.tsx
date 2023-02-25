@@ -12,7 +12,7 @@ const PostsLists = ({ id, title, slug, date, image, snippet }: IPosts) => {
       <div className="cursor-pointer group ">
         <div
           className={
-            "relative w-80 h-40 overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800   hover:scale-105 "
+            "relative h-40 w-[80vw] overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800   hover:scale-105 md:w-80 "
           }
         >
           <Link href={`/post/${encodeURIComponent(slug.current)}`}>

@@ -18,7 +18,7 @@ const Index: NextPageWithLayout = ({ posts }: any) => {
         Binance, the world's leading blockchain and crypto ecosystem.
       </p>
       <BlogCarousel posts={posts} />
-      <div className="grid gap-8 mt-10 lg:gap-8 md:grid-cols-2 xl:grid-cols-3 px-12">
+      <div className="grid gap-8 mt-10 place-content-center lg:gap-8 md:grid-cols-2 xl:grid-cols-3 px-12">
         {posts.length > 0 &&
           posts.map(
             ({ _id, title, slug, publishedAt, mainImage, snippet }: IPosts) =>
