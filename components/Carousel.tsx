@@ -6,8 +6,6 @@ import urlFor from "@/utils";
 import { IPosts } from "@/types/types";
 
 const BlogCarousel: React.FC<{ posts: IPosts[] }> = ({ posts }) => {
-  console.log(posts);
-
   const [currentSlide, setCurrentSlide] = useState(0);
   useEffect(() => {
     const slideInterval = setInterval(() => {

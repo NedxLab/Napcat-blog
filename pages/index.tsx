@@ -8,8 +8,6 @@ import BlogCarousel from "@/components/Carousel";
 import { IPosts } from "@/types/types";
 
 const Index: NextPageWithLayout = ({ posts }: any) => {
-  console.log(posts);
-
   return (
     <>
       <h1 className="mx-6 pt-4 text-3xl font-bold">Napcat Blog</h1>
